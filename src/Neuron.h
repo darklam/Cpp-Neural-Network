@@ -9,8 +9,8 @@ private:
   float learningConstant, momentum;
 
 public:
-  virtual Neuron(int, float, float);
-  std::vector<float> getWeights;
+  Neuron(int, float, float);
+  std::vector<float> getWeights();
   int getInputs();
   void loadWeightsFromVector(std::vector<float>);
   virtual float feed(std::vector<float>);

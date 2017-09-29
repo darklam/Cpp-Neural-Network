@@ -29,14 +29,14 @@ float Functions::squaredError(std::vector<float> out, std::vector<float> tar){
   return sum;
 }
 
-float Functions::meanSquaredError(std::vector<std::vector<float>> out,
-std::vector<std::vector<float>> tar){
+float Functions::meanSquaredError(std::vector<std::vector<float> > out,
+std::vector<std::vector<float> > tar){
   if(tar.size() != out.size()){
-    return -1
+    return -1;
   }
   float err = 0;
   for(int i = 0; i < out.size(); i++){
-    err += Functions::squaredError(out[i], tar[i])
+    err += Functions::squaredError(out[i], tar[i]);
   }
   return err / out.size();
 }

@@ -15,7 +15,7 @@ int Neuron::getInputs(){
   return this->weights.size();
 }
 
-double Neuron::feed(std::vector<float> in){
+float Neuron::feed(std::vector<float> in){
   float sum = 0;
   for(int i = 0; i < this->getInputs(); i++){
     sum += this->weights[i] * in[i];

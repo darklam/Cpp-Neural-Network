@@ -3,9 +3,10 @@
 
 #include "Neuron.h"
 
-class BiasNeuron: protected Neuron{
+class BiasNeuron: public Neuron{
 public:
   float feed(std::vector<float>); // No need to take inputs but for convenience's sake
+  BiasNeuron();
 };
 
 
