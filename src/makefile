@@ -1,4 +1,4 @@
-HFILES=BiasNeuron.h Neuron.h Functions.h RandomGen.h
+HFILES=Neuron.h Functions.h RandomGen.h
 CPPFILES=$(HFILES:.h=.cpp) main.cpp
 OFILES=$(CPPFILES:.cpp=.o)
 CXX=g++

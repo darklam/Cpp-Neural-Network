@@ -51,3 +51,11 @@ void Neuron::train(std::vector<float> deltas){
 std::vector<float> Neuron::getWeights(){
   return this->weights;
 }
+
+float BiasNeuron::feed(std::vector<float> in){
+  return 1.0f;
+}
+
+BiasNeuron::BiasNeuron() : Neuron(0, 0, 0){
+
+}

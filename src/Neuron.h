@@ -16,4 +16,11 @@ public:
   virtual float feed(std::vector<float>);
   void train(std::vector<float>);
 };
+
+class BiasNeuron: public Neuron{
+public:
+  float feed(std::vector<float>); // No need to take inputs but for convenience's sake
+  BiasNeuron();
+};
+
 #endif

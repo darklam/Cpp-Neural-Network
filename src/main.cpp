@@ -1,5 +1,4 @@
 #include "Neuron.h"
-#include "BiasNeuron.h"
 #include <iostream>
 
 int main(){
