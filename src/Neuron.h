@@ -4,7 +4,7 @@
 #include <vector>
 
 class Neuron{
-private:
+protected:
   std::vector<float> weights, lastDeltas;
   float learningConstant, momentum;
 
