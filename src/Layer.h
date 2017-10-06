@@ -4,12 +4,12 @@
 class Layer{
 protected:
   std::vector<Neuron *> neurons;
-  int inputs;
-  float momentum, learningConstant;
+  int inputs;  // This is the amount of inputs each neuron takes
 
 public:
-  Layer(int, int, float, float);
-  int getSize();
+  Layer(int, int);
+  int getSize();  // Returns the number of neurons in the layer
+  std::vector<float> feed(std::vector<float>);
 };
 
 class HiddenLayer: public Layer{
