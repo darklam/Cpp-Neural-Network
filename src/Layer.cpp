@@ -8,6 +8,7 @@ Layer::Layer(int neuronCount, int inputCount, float momentum, float learningCons
     this->neurons[i] = new Neuron(inputCount, learningConstant, momentum);
   }
   this->neurons[neuronCount] = new BiasNeuron();
+}
 
 std::vector<float> Layer::feed(std::vector<float> in){
   std::vector<float> out;
