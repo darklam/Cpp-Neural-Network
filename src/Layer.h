@@ -5,9 +5,10 @@ class Layer{
 protected:
   std::vector<Neuron *> neurons;
   int inputs;
+  float momentum, learningConstant;
 
 public:
-  Layer(int, int);
+  Layer(int, int, float, float);
   int getSize();
 };
 
