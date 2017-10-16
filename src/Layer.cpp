@@ -25,5 +25,10 @@ int Layer::getSize(){
 
 OutputLayer::OutputLayer(int neuronCount, int inputCount, float momentum, float learningConstant) :
  Layer(neuronCount, inputCount, momentum, learningConstant){
-   
+
  }
+
+ HiddenLayer::HiddenLayer(int neuronCount, int inputCount, float momentum, float learningConstant):
+  Layer(neuronCount, inputCount, momentum, learningConstant){
+
+  }
