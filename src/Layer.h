@@ -13,8 +13,18 @@ public:
 };
 
 class HiddenLayer: public Layer{
-  public HiddenLayer(int, int);
+public:
+  HiddenLayer(int, int);
+  void train(std::vector<float>, Layer *, std::vector<float>, std::vector<float>);
 };
+
+class OutputLayer: public Layer{
+public:
+  OutputLayer(int, int);
+  void train(std::vector<float>, std::vector<float>, std::vector<float>);
+}
+
+
 
 
 #endif
