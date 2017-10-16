@@ -22,3 +22,8 @@ std::vector<float> Layer::feed(std::vector<float> in){
 int Layer::getSize(){
   return this->neurons.size();
 }
+
+OutputLayer::OutputLayer(int neuronCount, int inputCount, float momentum, float learningConstant) :
+ Layer(neuronCount, inputCount, momentum, learningConstant){
+   
+ }
