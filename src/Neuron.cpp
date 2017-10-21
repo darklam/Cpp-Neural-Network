@@ -20,7 +20,7 @@ float Neuron::feed(std::vector<float> in){
   for(int i = 0; i < this->getInputs(); i++){
     sum += this->weights[i] * in[i];
   }
-  return Functions::sigmoid(sum);
+  return Functions::getFunction(sum);
 }
 
 void Neuron::loadWeightsFromVector(std::vector<float> weights){
