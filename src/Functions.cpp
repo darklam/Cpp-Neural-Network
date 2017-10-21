@@ -52,6 +52,8 @@ float Functions::getFunction(float x){
 float Functions::getFunctionDerivative(float x){
   if(Functions::functionUsed == sigmoid){
     return Functions::sigmoid(x) * (1 - Functions::sigmoid(x));
+  }else{
+    return 0;
   }
 }
 
