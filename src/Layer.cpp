@@ -31,4 +31,14 @@ OutputLayer::OutputLayer(int neuronCount, int inputCount, float momentum, float 
  HiddenLayer::HiddenLayer(int neuronCount, int inputCount, float momentum, float learningConstant):
   Layer(neuronCount, inputCount, momentum, learningConstant){
 
-  }
+}
+
+InputLayer::InputLayer(int neuronCount): Layer(neuronCount, 1, 0, 0){
+
+}
+
+std::vector<float> InputLayer::feed(std::vector<float> in){
+  return in;
+}
+
+

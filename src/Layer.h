@@ -9,7 +9,7 @@ protected:
 public:
   Layer(int, int, float, float);
   int getSize();  // Returns the number of neurons in the layer
-  std::vector<float> feed(std::vector<float>);
+  virtual std::vector<float> feed(std::vector<float>);
 };
 
 class HiddenLayer: public Layer{
@@ -22,6 +22,10 @@ class OutputLayer: public Layer{
 public:
   OutputLayer(int, int, float, float);
   std::vector<float> train(std::vector<float>, std::vector<float>, std::vector<float>);
+};
+
+class InputLayer: public Layer{
+  InputLayer(int);
 };
 
 
