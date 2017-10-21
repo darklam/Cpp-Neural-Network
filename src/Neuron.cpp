@@ -15,12 +15,12 @@ int Neuron::getInputs(){
   return this->weights.size();
 }
 
-float Neuron::feed(std::vector<float> in){
+float Neuron::feed(std::vector<float> in, std::string functionUsed){
   float sum = 0;
   for(int i = 0; i < this->getInputs(); i++){
     sum += this->weights[i] * in[i];
   }
-  return Functions::getFunction(sum);
+  return Functions::getFunction(sum, functionUsed);
 }
 
 void Neuron::loadWeightsFromVector(std::vector<float> weights){
@@ -52,7 +52,7 @@ std::vector<float> Neuron::getWeights(){
   return this->weights;
 }
 
-float BiasNeuron::feed(std::vector<float> in){
+float BiasNeuron::feed(std::vector<float> in, std::string functionUsed){
   return 1.0f;
 }
 

@@ -41,22 +41,18 @@ std::vector<std::vector<float> > tar){
   return err / out.size();
 }
 
-float Functions::getFunction(float x){
-  if(Functions::functionUsed == "sigmoid"){
+float Functions::getFunction(float x, std::string functionUsed){
+  if(functionUsed == "sigmoid"){
     return 1 / (1 + exp(-x));
   }else{
     return 0;
   }
 }
 
-float Functions::getFunctionDerivative(float x){
-  if(Functions::functionUsed == sigmoid){
-    return Functions::sigmoid(x) * (1 - Functions::sigmoid(x));
+float Functions::getFunctionDerivative(float x, std::string functionUsed){
+  if(functionUsed == "sigmoid"){
+    return Functions::getFunction(x, functionUsed) * (1 - Functions::getFunction(x, functionUsed));
   }else{
     return 0;
   }
-}
-
-void Function::setFunctionUsed(std::string function){
-  Functions::functionUsed = function;
 }
