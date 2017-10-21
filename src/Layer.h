@@ -13,6 +13,7 @@ protected:
 public:
   Layer(int, int, float, float);
   int getSize();  // Returns the number of neurons in the layer
+  std::vector<Neuron *> getNeurons();
   virtual std::vector<float> feed(std::vector<float>);
 };
 
