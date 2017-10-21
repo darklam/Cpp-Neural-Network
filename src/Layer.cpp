@@ -42,4 +42,20 @@ std::vector<float> InputLayer::feed(std::vector<float> in){
   return in;
 }
 
-
+std::vector<float> Layer::trainOutput(std::vector<float> target,
+std::vector<float> activations,
+std::vector<float> prevActivations){
+  Functions f;
+  std::vector<float> layerDeltas;
+  layerDeltas.resize(this->count);
+  for(int i = 0; i < this->count; i++){
+    Neuron *current = this->neurons[i];
+    layerDeltas[i]  = (activations[i] - target[i] * f.getFunctionDerivative(activations[i],this->functionUsed));
+    std::vector<float> deltas;
+    for(int j = 0; j <prevActivations.size(); j++){
+      deltas.push_back(prevActivations[j] * layerDeltas[i]);
+    }
+    current->train(deltas);
+  }
+  return layerDeltas;
+}
