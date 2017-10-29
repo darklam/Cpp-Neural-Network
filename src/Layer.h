@@ -30,6 +30,7 @@ public:
 };
 
 class InputLayer: public Layer{
+public:
   InputLayer(int);
   std::vector<float> feed(std::vector<float>);
 };
