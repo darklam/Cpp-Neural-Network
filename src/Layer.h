@@ -11,7 +11,7 @@ protected:
   std::string functionUsed; // The activation function used by the network
 
 public:
-  Layer(int, int, float, float);
+  Layer(int, int, float, float, std::string);
   int getSize();  // Returns the number of neurons in the layer
   std::vector<Neuron *> getNeurons();
   virtual std::vector<float> feed(std::vector<float>);
@@ -31,6 +31,7 @@ public:
 
 class InputLayer: public Layer{
   InputLayer(int);
+  std::vector<float> feed(std::vector<float>);
 };
 
 

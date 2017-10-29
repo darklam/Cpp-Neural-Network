@@ -1,4 +1,6 @@
 #include "Layer.h"
+#include "Neuron.h"
+#include "Functions.h"
 #include <vector>
 
 Layer::Layer(int neuronCount, int inputCount, float momentum, float learningConstant, std::string functionUsed){
@@ -49,11 +51,11 @@ std::vector<float> InputLayer::feed(std::vector<float> in){
 // The training function takes as arguments respectively: The deltas of the next layer in order, the pointer to the next layer, the
 // activations of the current layer that is being trained and the activations of the previous layer in order
 // The algorithm used for training as you may have already guessed is backpropagations
-std::vector<float> HiddenLayer::train(std::vector<float> nextDeltas, Layer *next, std::vector<float> activation, std::vector<float> prevActivations){
+std::vector<float> HiddenLayer::train(std::vector<float> nextDeltas, Layer *next, std::vector<float> activations, std::vector<float> prevActivations){
   std::vector<Neuron *> nextLayer = next->getNeurons();
   std::vector<float> layerDeltas;
-  layerDeltas.resize(this->count);
-  for(int i = 0; i < this->count; i++){
+  layerDeltas.resize(this->getSize());
+  for(int i = 0; i < this->getSize(); i++){
     float sum = 0.0;
     for(int j = 0; j < nextLayer.size(); j++){
       sum += nextDeltas[j] * nextLayer[j]->getWeights()[i];
@@ -74,12 +76,11 @@ std::vector<float> HiddenLayer::train(std::vector<float> nextDeltas, Layer *next
 std::vector<float> OutputLayer::train(std::vector<float> target,
 std::vector<float> activations,
 std::vector<float> prevActivations){
-  Functions f;
   std::vector<float> layerDeltas;
-  layerDeltas.resize(this->count);
-  for(int i = 0; i < this->count; i++){
+  layerDeltas.resize(this->getSize());
+  for(int i = 0; i < this->getSize(); i++){
     Neuron *current = this->neurons[i];
-    layerDeltas[i]  = (activations[i] - target[i] * f.getFunctionDerivative(activations[i],this->functionUsed));
+    layerDeltas[i]  = (activations[i] - target[i] * Functions::getFunctionDerivative(activations[i],this->functionUsed));
     std::vector<float> deltas;
     for(int j = 0; j <prevActivations.size(); j++){
       deltas.push_back(prevActivations[j] * layerDeltas[i]);
