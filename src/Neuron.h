@@ -14,13 +14,13 @@ public:
   std::vector<float> getWeights();
   int getInputs();
   void loadWeightsFromVector(std::vector<float>);
-  virtual float feed(std::vector<float>, std::string);
-  void train(std::vector<float>);
+  virtual float feed(std::vector<float>&, std::string);
+  void train(std::vector<float>&);
 };
 
 class BiasNeuron: public Neuron{
 public:
-  float feed(std::vector<float>, std::string); // No need to take inputs or the string but for convenience's sake
+  float feed(std::vector<float>&, std::string); // No need to take inputs or the string but for convenience's sake
   BiasNeuron();
 };
 

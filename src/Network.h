@@ -8,13 +8,17 @@
 class Network{
 public:
     Network(std::map<std::string, std::string>);
+    ~Network();
 
-    std::vector<float> feed(std::vector<float>);
+    std::vector<float> feed(std::vector<float> &);
+
+    void train(std::vector<float> &, std::vector<float> &);
 
 private:
-    Layer *inputLayer, *outputLayer;
+    InputLayer *inputLayer;
+    OutputLayer *outputLayer;
 
-    std::vector<Layer *> hiddenLayers;
+    std::vector<HiddenLayer *> hiddenLayers;
 
     std::vector<int> hiddenNeurons;
 
@@ -23,7 +27,5 @@ private:
     int hiddenCount = -1, inputs = -1, outputs = -1;
 
     float momentum = -1, learningConstant = -1;
-
-    std::vector<int> getHiddenModel(std::string);
 
 };
