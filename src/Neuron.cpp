@@ -1,6 +1,8 @@
 #include "Neuron.h"
 #include "Functions.h"
 #include "RandomGen.h"
+#include <iostream>
+#include <vector>
 
 Neuron::Neuron(int inputs, float learningConstant, float momentum){
 

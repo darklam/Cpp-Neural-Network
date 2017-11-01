@@ -4,6 +4,8 @@
 #include <sstream>
 #include "Layer.h"
 #include "Neuron.h"
+#include <vector>
+
 
 Network::Network(std::map<std::string, std::string> options){
     for(auto &x: options){
@@ -93,13 +95,13 @@ Network::Network(std::map<std::string, std::string> options){
 
     this->inputLayer = new InputLayer(this->inputs);
 
-    this->outputLayer = new OutputLayer(this->outputs, this->hiddenNeurons[this->hiddenCount - 1], this->momentum, this->learningConstant, this->functionUsed);
+    this->outputLayer = new OutputLayer(this->outputs, this->hiddenNeurons[this->hiddenCount - 1] + 1, this->momentum, this->learningConstant, this->functionUsed);
 
     for(int i = 0; i < this->hiddenCount; i++){
 
         if(i != 0){
 
-            this->hiddenLayers[i] = new HiddenLayer(this->hiddenNeurons[i], this->hiddenNeurons[i - 1], this->momentum, this->learningConstant, this->functionUsed);
+            this->hiddenLayers[i] = new HiddenLayer(this->hiddenNeurons[i], this->hiddenNeurons[i - 1] + 1, this->momentum, this->learningConstant, this->functionUsed);
 
         }else{
 

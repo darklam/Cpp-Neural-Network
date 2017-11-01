@@ -2,6 +2,7 @@
 #include "Neuron.h"
 #include "Functions.h"
 #include <vector>
+#include <iostream>
 
 Layer::Layer(int neuronCount, int inputCount, float momentum, float learningConstant, std::string functionUsed){
 
@@ -58,6 +59,7 @@ OutputLayer::OutputLayer(int neuronCount, int inputCount, float momentum, float 
  Layer(neuronCount, inputCount, momentum, learningConstant, functionUsed){
 
 	this->neurons.pop_back();
+	this->inputs--;
 
 }
 
@@ -67,7 +69,8 @@ HiddenLayer::HiddenLayer(int neuronCount, int inputCount, float momentum, float 
 }
 
 InputLayer::InputLayer(int neuronCount): Layer(neuronCount, 1, 0, 0, "sigmoid"){
-
+	this->neurons.pop_back();
+	this->inputs--;
 }
 
 std::vector<float> InputLayer::feed(std::vector<float> &in){
@@ -82,31 +85,31 @@ std::vector<float> InputLayer::feed(std::vector<float> &in){
 std::vector<float> HiddenLayer::train(std::vector<float> &nextDeltas, Layer *next, std::vector<float> &activations, std::vector<float> &prevActivations){
 
 	std::vector<Neuron *> nextLayer = next->getNeurons();
-	std::vector<float> layerDeltas;
+	std::vector<float> layerDeltas, neuronDeltas;
 	layerDeltas.resize(this->getSize());
 
 	for(int i = 0; i < this->getSize(); i++){
 
 		float sum = 0.0;
-
+		
 		for(int j = 0; j < nextLayer.size(); j++){
 
-		sum += nextDeltas[j] * nextLayer[j]->getWeights()[i];
+			sum += nextDeltas[j] * nextLayer[j]->getWeights()[i];
 
 		}
 
 		layerDeltas[i] = sum * Functions::getFunctionDerivative(activations[i], this->functionUsed);
 		Neuron *current = this->neurons[i];
-		std::vector<float> neuronDeltas;
 		neuronDeltas.resize(prevActivations.size());
 
 		for(int j = 0; j < prevActivations.size(); j++){
 
-		neuronDeltas[i] = layerDeltas[i] * prevActivations[j];
+			neuronDeltas[i] = layerDeltas[i] * prevActivations[j];
 
 		}
 		
 		current->train(neuronDeltas);
+		neuronDeltas.clear();
 	}
 	return layerDeltas;
 }
