@@ -85,16 +85,18 @@ std::vector<float> InputLayer::feed(std::vector<float> &in){
 std::vector<float> HiddenLayer::train(std::vector<float> &nextDeltas, Layer *next, std::vector<float> &activations, std::vector<float> &prevActivations){
 
 	std::vector<Neuron *> nextLayer = next->getNeurons();
-	std::vector<float> layerDeltas, neuronDeltas;
+	std::vector<float> layerDeltas;
 	layerDeltas.resize(this->getSize());
 
 	for(int i = 0; i < this->getSize(); i++){
 
 		float sum = 0.0;
-		
-		for(int j = 0; j < nextLayer.size(); j++){
 
-			sum += nextDeltas[j] * nextLayer[j]->getWeights()[i];
+		std::vector<float> neuronDeltas;
+		for(int j = 0; j < nextLayer.size(); j++){
+			
+			if(!nextLayer[j]->getWeights().empty())
+				sum += nextDeltas[j] * nextLayer[j]->getWeights()[i];
 
 		}
 
@@ -104,12 +106,11 @@ std::vector<float> HiddenLayer::train(std::vector<float> &nextDeltas, Layer *nex
 
 		for(int j = 0; j < prevActivations.size(); j++){
 
-			neuronDeltas[i] = layerDeltas[i] * prevActivations[j];
+			neuronDeltas[j] = layerDeltas[i] * prevActivations[j];
 
 		}
 		
 		current->train(neuronDeltas);
-		neuronDeltas.clear();
 	}
 	return layerDeltas;
 }
@@ -131,7 +132,7 @@ std::vector<float> &prevActivations){
 
 		for(int j = 0; j < prevActivations.size(); j++){
 
-		deltas[j] = prevActivations[j] * layerDeltas[i];
+			deltas[j] = prevActivations[j] * layerDeltas[i];
 
 		}
 
